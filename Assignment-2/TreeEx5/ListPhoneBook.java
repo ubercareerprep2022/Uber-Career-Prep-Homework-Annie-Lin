@@ -12,7 +12,9 @@ public class ListPhoneBook {
   }
   
   public long find(ArrayList<PhoneBook> list, PhoneBook phoneBook){
-    
-    return 0;
+    for (PhoneBook phone : list){
+      if (phone.name == phoneBook.name) return phone.phoneNumber;
+    }
+    return -1;
   }
 }
