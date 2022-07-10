@@ -14,58 +14,73 @@ public class GraphEx1 {
     private Map<GraphNode, List<GraphNode>> adjNodes;
 
     void addNode(int key) {
-      adjNodes.put(key, null); // or replace null with the list this node is connected with
+      GraphNode node = new GraphNode(key);
+      adjNodes.put(node, null); // or replace null with the list this node is connected with
       return;
     }
-
+  
     void removeNode(int key) {
-      if (adjNodes.containsKey(key)) {
-        adjNodes.remove(key);
+      GraphNode node = new GraphNode(key);
+      if (adjNodes.containsKey(node)) {
+        adjNodes.remove(node);
         return;
       }
       System.out.print("Node does not exist.");
       return;
     }
-
+  
     void addEdge(int node1, int node2){
-        if (adjNodes.containsKey(node1) & adjNodes.containsKey(node2)){
-          List node1data = adjNodes.get(node1);
-          adjNodes.put(node1, node1data.add(node2));
-          List node2data = adjNodes.get(node2);
-          adjNodes.put(node2, node1data.add(node1));
-        }
-        else if (adjNodes.containsKey(node1)){
-          List node1data = adjNodes.get(node1);
-          adjNodes.put(node1, node1data.add(node2));
-          List node2data = new ArrayList<GraphNode>();
-          adjNodes.put(node2, node2data.add(node1));
-        }
-        else {
-          List node2data = adjNodes.get(node2);
-          adjNodes.put(node2, node2data.add(node1));
-          List node1data = new ArrayList<GraphNode>();
-          adjNodes.put(node1, node1data.add(node1));
-        }
-      }
+      GraphNode gNode1 = new GraphNode(node1);
+      GraphNode gNode2 = new GraphNode(node2);
 
+      if (adjNodes.containsKey(gNode1) & adjNodes.containsKey(gNode2)){
+        List node1data = adjNodes.get(gNode1);
+        adjNodes.put(gNode1, node1data.add(gNode2));
+        List node2data = adjNodes.get(gNode2);
+        adjNodes.put(gNode2, node1data.add(gNode1));
+      }
+      else if (adjNodes.containsKey(gNode1)){
+        List node1data = adjNodes.get(gNode1);
+        adjNodes.put(gNode1, node1data.add(gNode2));
+        List node2data = new ArrayList<GraphNode>();
+        adjNodes.put(gNode2, node2data.add(gNode1));
+      }
+      else {
+        List node2data = adjNodes.get(gNode2);
+        adjNodes.put(gNode2, node2data.add(gNode1));
+        List node1data = new ArrayList<GraphNode>();
+        adjNodes.put(gNode1, node1data.add(node1));
+      }
+      }
+  
     void removeEdge(int node1, int node2){
-      if (adjNodes.containsKey(node1) & adjNodes.containsKey(node2)){
-        // List node1data = adjNodes.get(node1);
-        // adjNodes.put(node1, node1data.add(node2));
-        // List node2data = adjNodes.get(node2);
-        // adjNodes.put(node2, node1data.add(node1));
+      GraphNode gNode1 = new GraphNode(node1);
+      GraphNode gNode2 = new GraphNode(node2);
+
+      if (adjNodes.containsKey(gNode1) & adjNodes.containsKey(gNode2)){
+        List node1data = adjNodes.get(gNode1);
+        for (GraphNode n : node1data){
+          if (n.data == gNode2.data){
+            Integer val = n.data; 
+            // reference: https://ourtechroom.com/tech/insert-vertical-line-vs-code/
+            node1data.remove(val); 
+            // is list.remove used correctly?
+            // how can we deal with the situation if there is another node that 
+            // contains the same value
+          }
+        }
       }
       return;
     }
+
+    // Get nodes that are connected to the node represented by ‘key’.
+    List<GraphNode> getAdjNodes(int key){
+      GraphNode node = new GraphNode(key);
+      if (adjNodes.containsKey(node.data)){
+        return adjNodes.get(node.data);
+      }
+      return null;
+    } 
   }
-
+  
 }
-
-// Implement the following methods for the GraphWithAdjacencyList class:
-// void addNode(int key) : Adds a new node to the graph.
-// void removeNode(int key): Removes the node from the graph.
-// void addEdge(int node1, int node2): Adds an edge between node1 and node2
-// void removeEdge(int node1, int node2): Removes an edge between node1 and
-// node2.
-// List<GraphNode> getAdjNodes(int key): Get nodes that are connected to the
-// node represented by ‘key’.
