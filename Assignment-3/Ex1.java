@@ -28,7 +28,7 @@ class ThreePartitionSort {
 
     public static int[] sort(int[] arr){
 
-        Set<Integer> set = new TreeSet<>();
+        Set<Integer> set = new TreeSet<Integer>();
         for (int i : arr){
             set.add(i);
         }

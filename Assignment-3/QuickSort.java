@@ -1,7 +1,5 @@
 // geeksforgeeks.org/quick-sort/
 
-import java.io.*;
-
 class QuickSort{
 	
 static void swap(int[] arr, int i, int j)

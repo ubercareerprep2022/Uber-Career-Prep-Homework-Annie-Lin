@@ -13,7 +13,7 @@
 // 10,000 / 100 = 10
 // ???
 
-Class ExternalSort{
+class ExternalSort{
     static void main(String[] args){
 
     }
@@ -51,15 +51,15 @@ Class ExternalSort{
         return arr;
     }
 
-    static int[] mergeSort(int arr[], int lo, int hi){
+    static void mergeSort(int arr[], int lo, int hi){
 
         while (lo < hi){ // if we don't have the while loop, recursion will be infinite 
             int mid = arr.length / 2;
-            mergeSort(arr[], lo, mid-1);
-            mergeSort(arr[], mid, hi);
-        }
+            mergeSort(arr, lo, mid-1);
+            mergeSort(arr, mid, hi);
 
-        merge(arr[], lo, mid, hi);
+            merge(arr, lo, mid, hi);
+        }
     }
 
 }
